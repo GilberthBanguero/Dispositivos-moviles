@@ -10,12 +10,16 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -26,11 +30,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -54,43 +61,83 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
+fun StudentTitle(
+    @StringRes name: Int,
+    @StringRes code: Int,
+) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = stringResource(id = name),
+            fontWeight = FontWeight.Bold,
+            color = colorResource(id = R.color.teal_200),
+            fontSize = 32.sp,
+        )
+        Text(
+            text = stringResource(id = code),
+            fontWeight = FontWeight.Medium,
+            color = colorResource(id = R.color.teal_200),
+            fontSize = 25.sp,
+        )
+    }
+}
+
+@Composable
 fun ArtSpaceScreen(modifier: Modifier = Modifier) {
 
-    val firstArtwork = R.drawable.pele_face
-    val secondArtwork = R.drawable.muhammad_face
-    val thirdArtwork = R.drawable.federer_face
-    val fourthArtwork = R.drawable.jordan_face
-    val fifthArtwork = R.drawable.lebron_face
-    val sixthArtwork = R.drawable.woods_face
-    val seventhArtwork = R.drawable.phelps_face
-    val eighthArtwork = R.drawable.bolt_face
-    val ninethArtwork = R.drawable.serena_face
-    val tenthArtwork = R.drawable.schumacher_face
+    var result by remember { mutableStateOf( 1) }
 
-    var title by remember { mutableStateOf(R.string.pele) }
-    var year by remember { mutableStateOf(R.string.pele_description) }
-    var currentArtwork by remember { mutableStateOf(firstArtwork) }
-    var imageResource by remember { mutableStateOf(currentArtwork) }
+    val image = when(result){
+        1 -> R.drawable.pele_face
+        2 -> R.drawable.muhammad_face
+        3 -> R.drawable.federer_face
+        4 -> R.drawable.jordan_face
+        5 -> R.drawable.lebron_face
+        6 -> R.drawable.woods_face
+        7 -> R.drawable.phelps_face
+        8 -> R.drawable.bolt_face
+        9 -> R.drawable.serena_face
+        else -> R.drawable.schumacher_face
+    }
+
+    val title = when(result){
+        1 -> R.string.pele
+        2 -> R.string.muhammad
+        3 -> R.string.federer
+        4 -> R.string.jordan
+        5 -> R.string.leBron
+        6 -> R.string.woods
+        7 -> R.string.phelps
+        8 -> R.string.bolt
+        9 -> R.string.serena
+        else -> R.string.schumacher
+    }
+
+    val description = when(result){
+        1 -> R.string.pele_description
+        2 -> R.string.muhammad_description
+        3 -> R.string.federer_description
+        4 -> R.string.jordan_description
+        5 -> R.string.leBron_description
+        6 -> R.string.woods_description
+        7 -> R.string.phelps_description
+        8 -> R.string.bolt_description
+        9 -> R.string.serena_description
+        else -> R.string.schumacher_description
+    }
+
+    var name by remember { mutableStateOf(R.string.name) }
+    var code by remember { mutableStateOf(R.string.code) }
+
 
     Column(
         modifier = modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
     ){
-        Text(
-            text = stringResource(R.string.nombre_codigo), fontSize = 25.sp
-        )
-        ArtworkImage(
-            currentArtwork = currentArtwork
-        )
-        Spacer(
-            modifier = modifier.size(16.dp)
-        )
-        ArtworkTitle(
-            title = title,
-            year = year,
-        )
-        Spacer(
-            modifier = modifier.size(25.dp)
+        StudentTitle(
+            name = name,
+            code = code,
         )
         Row(
             modifier = modifier
@@ -98,62 +145,30 @@ fun ArtSpaceScreen(modifier: Modifier = Modifier) {
                 .fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
+            Spacer(
+                modifier = modifier.size(5.dp)
+            )
+            ArtworkImage(
+                image = image
+            )
+            Spacer(
+                modifier = modifier.size(5.dp)
+            )
+            ArtworkTitle(
+                title = title,
+                description = description,
+            )
+            Spacer(
+                modifier = modifier.size(25.dp)
+            )
             Button(
                 onClick = {
-                    when (currentArtwork) {
-                        firstArtwork -> {
-                            currentArtwork = tenthArtwork
-                            title = R.string.schumacher
-                            year = R.string.schumacher_description
-                        }
-                        secondArtwork -> {
-                            currentArtwork = firstArtwork
-                            title = R.string.pele
-                            year = R.string.pele_description
-                        }
-                        thirdArtwork -> {
-                            currentArtwork = secondArtwork
-                            title = R.string.muhammad
-                            year = R.string.muhammad_description
-                        }
-                        fourthArtwork -> {
-                            currentArtwork = thirdArtwork
-                            title = R.string.federer
-                            year = R.string.federer_description
-                        }
-                        fifthArtwork -> {
-                            currentArtwork = fourthArtwork
-                            title = R.string.jordan
-                            year = R.string.jordan_description
-                        }
-                        sixthArtwork -> {
-                            currentArtwork = fifthArtwork
-                            title = R.string.leBron
-                            year = R.string.leBron_description
-                        }
-                        seventhArtwork -> {
-                            currentArtwork = sixthArtwork
-                            title = R.string.woods
-                            year = R.string.woods_description
-                        }
-                        eighthArtwork -> {
-                            currentArtwork = seventhArtwork
-                            title = R.string.phelps
-                            year = R.string.phelps_description
-                        }
-                        ninethArtwork -> {
-                            currentArtwork = eighthArtwork
-                            title = R.string.bolt
-                            year = R.string.bolt_description
-                        }
-                        else -> {
-                            currentArtwork = ninethArtwork
-                            title = R.string.serena
-                            year = R.string.serena_description
-                        }
+                    if (result > 1){
+                        result -= 1
                     }
                 },
                 colors = ButtonDefaults.buttonColors(
+                    containerColor = colorResource(id = R.color.teal_200),
                     contentColor = colorResource(id = R.color.gray_900)
                 ),
                 elevation = ButtonDefaults.elevatedButtonElevation(
@@ -163,78 +178,40 @@ fun ArtSpaceScreen(modifier: Modifier = Modifier) {
                 )
             ) {
                 Text(
-                    text = stringResource(R.string.previous), fontSize = 15.sp
+                    text = stringResource(id = R.string.previous),
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Medium,
+                    color = colorResource(id = R.color.white)
                 )
             }
             Button(
                 onClick = {
-
-                    currentArtwork = firstArtwork
-                    title = R.string.pele
-                    year = R.string.pele_description
-
-                }) {
-                    Text(
-                        text = stringResource(R.string.restart), fontSize = 15.sp
-                    )
-                }
-            Button(
-                onClick = {
-                    when (currentArtwork) {
-                        firstArtwork -> {
-                            currentArtwork = secondArtwork
-                            title = R.string.muhammad
-                            year = R.string.muhammad_description
-                        }
-                        secondArtwork -> {
-                            currentArtwork = thirdArtwork
-                            title = R.string.federer
-                            year = R.string.federer_description
-                        }
-                        thirdArtwork -> {
-                            currentArtwork = fourthArtwork
-                            title = R.string.jordan
-                            year = R.string.jordan_description
-                        }
-                        fourthArtwork -> {
-                            currentArtwork = fifthArtwork
-                            title = R.string.leBron
-                            year = R.string.leBron_description
-                        }
-                        fifthArtwork -> {
-                            currentArtwork = sixthArtwork
-                            title = R.string.woods
-                            year = R.string.woods_description
-                        }
-                        sixthArtwork -> {
-                            currentArtwork = seventhArtwork
-                            title = R.string.phelps
-                            year = R.string.phelps_description
-                        }
-                        seventhArtwork -> {
-                            currentArtwork = eighthArtwork
-                            title = R.string.bolt
-                            year = R.string.bolt_description
-                        }
-                        eighthArtwork -> {
-                            currentArtwork = ninethArtwork
-                            title = R.string.serena
-                            year = R.string.serena_description
-                        }
-                        ninethArtwork -> {
-                            currentArtwork = thirdArtwork
-                            title = R.string.schumacher
-                            year = R.string.schumacher_description
-                        }
-                        else -> {
-                            currentArtwork = firstArtwork
-                            title = R.string.pele
-                            year = R.string.pele_description
-                        }
-                    }
+                    result = 1
                 },
                 colors = ButtonDefaults.buttonColors(
-                    contentColor = colorResource(id = R.color.gray_900)
+                    containerColor = colorResource(id = R.color.teal_200),
+                    contentColor = colorResource(id = R.color.teal_200)
+                ),
+                elevation = ButtonDefaults.elevatedButtonElevation(
+                    defaultElevation = 1.dp,
+                    pressedElevation = 0.dp,
+                    focusedElevation = 0.dp,
+                )
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Refresh,
+                    contentDescription = null,
+                    tint = Color.White,
+                    modifier = Modifier.size(24.dp) // Tamaño del icono
+                )
+            }
+            Button(
+                onClick = {
+                    result += 1
+                },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = colorResource(id = R.color.teal_200),
+                    contentColor = colorResource(id = R.color.black),
                 ),
                 elevation = ButtonDefaults.elevatedButtonElevation(
                     defaultElevation = 1.dp,
@@ -243,7 +220,10 @@ fun ArtSpaceScreen(modifier: Modifier = Modifier) {
                 ),
             ) {
                 Text(
-                    text = stringResource(R.string.next), fontSize = 15.sp
+                    text = stringResource(id = R.string.next),
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Medium,
+                    color = colorResource(id = R.color.white)
                 )
             }
         }
@@ -253,20 +233,29 @@ fun ArtSpaceScreen(modifier: Modifier = Modifier) {
 @Composable
 fun ArtworkImage(
     modifier: Modifier = Modifier,
-    @DrawableRes currentArtwork: Int
+    @DrawableRes image: Int
 ) {
-    Image(
-        painter = painterResource(id = currentArtwork),
-        contentDescription = null,
-        modifier = modifier.fillMaxWidth(),
-        contentScale = ContentScale.FillWidth
-    )
+    Surface(
+        modifier = modifier.fillMaxWidth().padding(10.dp).shadow(30.dp),
+        color = colorResource(id = R.color.gray_900),
+        shape = MaterialTheme.shapes.medium, // Opcional: ajusta la forma del Surface
+    ) {
+        Image(
+            painter = painterResource(id = image),
+            contentDescription = null,
+            modifier = modifier
+                .padding(10.dp)
+                .aspectRatio(1f)
+                .shadow(20.dp),
+            contentScale = ContentScale.Crop
+        )
+    }
 }
 
 @Composable
 fun ArtworkTitle(
     @StringRes title: Int,
-    @StringRes year: Int,
+    @StringRes description: Int,
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
@@ -274,14 +263,18 @@ fun ArtworkTitle(
         Text(
             text = stringResource(id = title),
             fontWeight = FontWeight.Bold,
-            color = colorResource(id = R.color.red),
-            fontSize = 32.sp,
+            color = colorResource(id = R.color.black),
+            fontSize = 16.sp,
+            textAlign = TextAlign.Center
+
         )
         Text(
-            text = stringResource(id = year),
+            text = stringResource(id = description),
             fontWeight = FontWeight.Medium,
             color = colorResource(id = R.color.black),
             fontSize = 16.sp,
+            textAlign = TextAlign.Center
+
         )
     }
 }
