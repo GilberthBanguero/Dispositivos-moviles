@@ -139,28 +139,28 @@ fun ArtSpaceScreen(modifier: Modifier = Modifier) {
             name = name,
             code = code,
         )
+        Spacer(
+            modifier = modifier.size(5.dp)
+        )
+        ArtworkImage(
+            image = image
+        )
+        Spacer(
+            modifier = modifier.size(5.dp)
+        )
+        ArtworkTitle(
+            title = title,
+            description = description,
+        )
+        Spacer(
+            modifier = modifier.size(25.dp)
+        )
         Row(
             modifier = modifier
                 .padding(horizontal = 8.dp)
                 .fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Spacer(
-                modifier = modifier.size(5.dp)
-            )
-            ArtworkImage(
-                image = image
-            )
-            Spacer(
-                modifier = modifier.size(5.dp)
-            )
-            ArtworkTitle(
-                title = title,
-                description = description,
-            )
-            Spacer(
-                modifier = modifier.size(25.dp)
-            )
             Button(
                 onClick = {
                     if (result > 1){
@@ -207,7 +207,9 @@ fun ArtSpaceScreen(modifier: Modifier = Modifier) {
             }
             Button(
                 onClick = {
-                    result += 1
+                    if (result <= 9){
+                        result += 1
+                    }
                 },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = colorResource(id = R.color.teal_200),
@@ -263,7 +265,7 @@ fun ArtworkTitle(
         Text(
             text = stringResource(id = title),
             fontWeight = FontWeight.Bold,
-            color = colorResource(id = R.color.black),
+            color = colorResource(id = R.color.red),
             fontSize = 16.sp,
             textAlign = TextAlign.Center
 

@@ -1,27 +1,39 @@
 <resources>
     <string name="app_name">Art Space</string>
+
     <string name="pele">Pele</string>
     <string name="pele_description">El futbolista brasileño debutó con su selección a los 16 años y al año siguiente ya la lideró en la Copa del Mundo.</string>
+
     <string name="muhammad">Muhammad Ali</string>
     <string name="muhammad_description">El boxeador no solo fue un deportista único, también fue una figura social muy influyente y lideró muchas luchas sociales y humanitarias.</string>
+
     <string name="federer">Roger Federer</string>
     <string name="federer_description">Aún en activo, el tenista suizo es el mejor de la historia, seguido muy de cerca por el español Rafa Nadal.</string>
+
     <string name="jordan">Michael Jordan</string>
     <string name="jordan_description">No cabe duda de que el jugador de baloncesto más grande de todos los tiempos es también uno de los mejores deportistas de la historia.</string>
+
     <string name="leBron">LeBron James</string>
     <string name="leBron_description">Otro jugador de baloncesto, el cual sigue de cerca a Jordan pero todavía le queda mucho por lograr para tener alguna posibilidad de destronarlo.</string>
+
     <string name="woods">Tiger Woods</string>
     <string name="woods_description">Sin duda es el mejor golfista de todos los tiempos, y uno de los mejores deportistas de la historia.</string>
+
     <string name="phelps">Michael Phelps</string>
     <string name="phelps_description">Será difícil encontrar un nadador que supere los datos de Michael Phelps, un verdadero tiburón que se colgó a lo largo de su carrera 28 medallas olímpicas, 23 de ellas de oro.</string>
+
     <string name="bolt">Usain Bolt</string>
     <string name="bolt_description">El atleta jamaicano era un verdadero espectáculo cuando llegaba el momento de competir, ya que daba la sensación de que paseaba por la pista mientras los demás se dejaban el último aliento para superarlo.</string>
+
     <string name="serena">Serena Williams</string>
     <string name="serena_description">La tenista estadounidense merece sin duda colarse entre los mejores gracias a unos datos abrumadores desde que comenzó su carrera.</string>
+
     <string name="schumacher">Michael Schumacher</string>
     <string name="schumacher_description">El mundo de la Fórmula 1 también tiene su representante entre los mejores de la historia.</string>
+
     <string name="previous">Previous</string>
     <string name="next">Next</string>
+
     <string name="nombre_codigo">Gilberth Banguero - 2110015</string>
     <string name="name">Gilberth Banguero</string>
     <string name="code">2110015</string>
